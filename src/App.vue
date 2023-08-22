@@ -1,10 +1,9 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import headerComp from './components/headerComp.vue';
 </script>
 
 <template>
-  <div class="container-fluid text-center text-white bg-primary">
-    <HelloWorld />
-  </div>
+  <header-comp />
+  <router-view></router-view>
 </template>
 
