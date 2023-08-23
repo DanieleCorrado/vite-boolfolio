@@ -7,7 +7,7 @@ export default {
   name: 'ProjectShow',
   data() {
     return {
-      project: {}
+      project: null,
     }
   },
   mounted() {
@@ -15,7 +15,10 @@ export default {
     const projectId = this.$route.params.id;
 
     axios.get(API_URL + '/project-show/' + projectId)
-      .then(res => this.project = res.data.projects)
+      .then(res => {
+        this.project = res.data.projects;
+        this.type = res.data.projects.type
+      })
       .catch(err => console.error(err));
   }
 }
@@ -23,10 +26,12 @@ export default {
 
 <template>
   <main>
-    <h1>Title: {{ project.title }}</h1>
-    <p>Project leader: {{ project.project_leader }}</p>
-    <p>Starting date: {{ project.starting_date }}</p>
-    <p>Project type: {{ project.type.name }}</p>
+    <div v-if="project">
+      <h1>Title: {{ project.title }}</h1>
+      <p>Project leader: {{ project.project_leader }}</p>
+      <p>Starting date: {{ project.starting_date }}</p>
+      <p>Project type: {{ project.type.name }}</p>
+    </div>
   </main>
 </template>
 
